@@ -1,6 +1,5 @@
-# Django Project Title
-
-One Paragraph of project description goes here.
+## GDTBOOST Backend
+Our Complete backend project using python django.
 
 ## Getting Started
 
