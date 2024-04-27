@@ -1,4 +1,4 @@
-## GDTBOOST Backend
+## GEDBOOST Backend
 Our Complete backend project using python django.
 
 ## Getting Started
