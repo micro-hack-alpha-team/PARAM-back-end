@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-wz6qutjyqvz75u6yodn&ut%krf*5x%y1@=5g447h7q@hzxhm$!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'user',
     'fileupload',
     'FlowChart',
-    'rest_framework_swagger',                    
+    'Quiz',
+    'rest_framework_swagger', 
+    'drf_spectacular'                   
     
 
 ]
@@ -142,6 +144,14 @@ REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
     ),
+     'DEFAULT_SCHEMA_CLASS': (
+        'drf_spectacular.openapi.AutoSchema',
+    ),
+
+}
+
+SPECTACULAR_SETTING = {
+    'TITLE' : 'GEDBoost parametrage'
 }
 
 # CORS settings

@@ -19,6 +19,8 @@ from django.urls import include, re_path , path
 
 from user import urls as user_urls
 from fileupload import urls as upload_urls
+from FlowChart import urls as flow_chart_urls
+from Quiz import urls as quiz_urls
 from rest_framework.schemas import get_schema_view
 from django.views.generic  import TemplateView
 
@@ -37,16 +39,20 @@ schema_view = get_schema_view(
 
 apipatterns = [
     re_path(r'^user/?', include(user_urls)),
-    re_path(r'^user/?', include(upload_urls)),
+    re_path(r'^upload/?', include(upload_urls)),
+    re_path(r'^flowchart/?', include(flow_chart_urls)),
+    re_path(r'^quiz/?', include(quiz_urls)),
+
     ]
 
 urlpatterns = [
     re_path(r'^admin/?', admin.site.urls),
     re_path(r'^api/?', include(apipatterns)),
     path('api_schema/', schema_view.as_view()),
-    # path('docs/', TemplateView.as_view(
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0),name='schema-swagger-ui'),
+]
+
+# path('docs/', TemplateView.as_view(
     #     template_name='docs.html',
     #     extra_context={'schema_url':'api_schema'}
     #     ), name='swagger-ui'),
-    path('docs/', schema_view.with_ui('swagger', cache_timeout=0),name='schema-swagger-ui'),
-]

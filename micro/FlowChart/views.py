@@ -18,6 +18,7 @@ class MakeFlowChart(APIView):
             dot.node(document.type, document.type) 
         for access_log in accesslogs:
             dot.edge(str(access_log.document.id), str(access_log.actor.id))
+        return dot    
         
 
 
