@@ -15,11 +15,25 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, re_path
+from django.urls import include, re_path , path
 
 from user import urls as user_urls
 from fileupload import urls as upload_urls
+from rest_framework.schemas import get_schema_view
+from django.views.generic  import TemplateView
 
+from rest_framework import permissions
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
+from rest_framework_swagger.views import get_swagger_view
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="API Schema",
+        default_version='v1',),
+    public=True,
+    permission_classes=(permissions.AllowAny,),
+)
 
 apipatterns = [
     re_path(r'^user/?', include(user_urls)),
@@ -29,4 +43,10 @@ apipatterns = [
 urlpatterns = [
     re_path(r'^admin/?', admin.site.urls),
     re_path(r'^api/?', include(apipatterns)),
+    path('api_schema/', schema_view.as_view()),
+    # path('docs/', TemplateView.as_view(
+    #     template_name='docs.html',
+    #     extra_context={'schema_url':'api_schema'}
+    #     ), name='swagger-ui'),
+    path('docs/', schema_view.with_ui('swagger', cache_timeout=0),name='schema-swagger-ui'),
 ]
